@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>A01017478_A4.2 - Reporte de Actividad</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; font-size: 11px; }
+        h1 { color: #003366; border-bottom: 2px solid #003366; }
+        h2 { color: #006699; margin-top: 30px; }
+        h3 { color: #333; }
+        .score { background: #d4edda; padding: 10px; border-radius: 5px; font-weight: bold; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto; font-size: 10px; }
+        .error { color: #dc3545; }
+        table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #003366; color: white; }
+        .header { text-align: center; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Actividad 4.2 - Ejercicios de Programacion</h1>
+    <p><strong>Matricula:</strong> A01017478</p>
+    <p><strong>Repositorio:</strong> https://github.com/AlexisAlduncintec/A01017478_A4.2</p>
+</div>
+
+<h2>1. Programa 1: computeStatistics.py</h2>
+<p><strong>Descripcion:</strong> Calcula estadisticas descriptivas (COUNT, MEAN, MEDIAN, MODE, SD, VARIANCE) de un archivo de numeros.</p>
+
+<h3>Resultado Pylint</h3>
+<div class="score">Your code has been rated at 10.00/10</div>
+
+<h3>Resultados de Pruebas</h3>
+<table>
+    <tr><th>TC</th><th>COUNT</th><th>MEAN</th><th>MEDIAN</th><th>MODE</th><th>SD</th><th>Notas</th></tr>
+    <tr><td>TC1</td><td>400</td><td>242.32</td><td>239.5</td><td>393</td><td>145.258</td><td>OK</td></tr>
+    <tr><td>TC2</td><td>1977</td><td>250.784</td><td>247</td><td>230</td><td>144.171</td><td>OK</td></tr>
+    <tr><td>TC3</td><td>12624</td><td>249.776</td><td>249</td><td>94</td><td>145.318</td><td>OK</td></tr>
+    <tr><td>TC4</td><td>12624</td><td>149.003</td><td>147.75</td><td>123.75</td><td>130.414</td><td>OK</td></tr>
+    <tr><td>TC5</td><td>309</td><td>240.045</td><td>241</td><td>393</td><td>146.103</td><td>Invalid: ABA, ll</td></tr>
+    <tr><td>TC6</td><td>3000</td><td>1.879e+20</td><td>1.880e+20</td><td>#N/A</td><td>1.074e+20</td><td>Large numbers</td></tr>
+    <tr><td>TC7</td><td>12767</td><td>2.475e+20</td><td>2.466e+20</td><td>#N/A</td><td>1.446e+20</td><td>Invalid: ABBA, ERROR</td></tr>
+</table>
+
+<h3>Ejemplo de Ejecucion (TC1)</h3>
+<pre>
+$ python computeStatistics.py TC1.txt
+COUNT: 400
+MEAN: 242.32
+MEDIAN: 239.5
+MODE: 393
+SD: 145.25810683056557
+VARIANCE: 21152.79959899749
+Elapsed Time: 0.004217 seconds
+</pre>
+
+<h3>Manejo de Datos Invalidos (TC5)</h3>
+<pre>
+$ python computeStatistics.py TC5.txt
+<span class="error">Error: Invalid data at line 5: 'ABA'
+Error: Invalid data at line 239: 'll'</span>
+COUNT: 309
+MEAN: 240.04527508090612
+MEDIAN: 241
+MODE: 393
+...
+</pre>
+
+<hr>
+
+<h2>2. Programa 2: convertNumbers.py</h2>
+<p><strong>Descripcion:</strong> Convierte numeros a representacion binaria y hexadecimal.</p>
+
+<h3>Resultado Pylint</h3>
+<div class="score">Your code has been rated at 10.00/10</div>
+
+<h3>Resultados de Pruebas</h3>
+<table>
+    <tr><th>TC</th><th>Items</th><th>Caracteristicas</th><th>Estado</th></tr>
+    <tr><td>TC1</td><td>200</td><td>Enteros grandes positivos</td><td>OK</td></tr>
+    <tr><td>TC2</td><td>200</td><td>Enteros grandes positivos</td><td>OK</td></tr>
+    <tr><td>TC3</td><td>200</td><td>Numeros negativos (complemento a 2)</td><td>OK</td></tr>
+    <tr><td>TC4</td><td>41</td><td>Datos invalidos (ABC, ERR, VAL)</td><td>OK</td></tr>
+</table>
+
+<h3>Ejemplo de Ejecucion (TC2 - primeras lineas)</h3>
+<pre>
+$ python convertNumbers.py TC2.txt
+ITEM    NUMBER      BIN                         HEX
+1       7116776     11011001001011111101000     6C97E8
+2       1666340     110010110110100100100       196D24
+3       8886983     100001111001101011000111    879AC7
+...
+</pre>
+
+<h3>Numeros Negativos (TC3)</h3>
+<pre>
+ITEM    NUMBER    BIN           HEX
+1       -39       1111011001    FFFFFFFFD9
+2       -36       1111011100    FFFFFFFFDC
+3       8         1000          8
+</pre>
+
+<h3>Manejo de Datos Invalidos (TC4)</h3>
+<pre>
+<span class="error">Error: Invalid data at item 8: 'ABC'
+Error: Invalid data at item 21: 'ERR'
+Error: Invalid data at item 41: 'VAL'</span>
+ITEM    NUMBER    BIN         HEX
+...
+8       ABC       #VALUE!     #VALUE!
+...
+</pre>
+
+<hr>
+
+<h2>3. Programa 3: wordCount.py</h2>
+<p><strong>Descripcion:</strong> Cuenta la frecuencia de palabras distintas en un archivo.</p>
+
+<h3>Resultado Pylint</h3>
+<div class="score">Your code has been rated at 10.00/10</div>
+
+<h3>Resultados de Pruebas</h3>
+<table>
+    <tr><th>TC</th><th>Total Palabras</th><th>Palabra mas frecuente</th><th>Estado</th></tr>
+    <tr><td>TC1</td><td>100</td><td>conservative (2)</td><td>OK</td></tr>
+    <tr><td>TC2</td><td>184</td><td>amongst, brass, chain... (4)</td><td>OK</td></tr>
+    <tr><td>TC3</td><td>500</td><td>notice (3)</td><td>OK</td></tr>
+    <tr><td>TC4</td><td>1000</td><td>started (3)</td><td>OK</td></tr>
+    <tr><td>TC5</td><td>5000</td><td>kg, managed, pets... (5)</td><td>OK</td></tr>
+</table>
+
+<h3>Ejemplo de Ejecucion (TC1)</h3>
+<pre>
+$ python wordCount.py TC1.txt
+Row Labels      Count of TC1
+conservative    2
+achievement     1
+adequate        1
+adventures      1
+...
+Grand Total     100
+
+Elapsed Time: 0.000684 seconds
+</pre>
+
+<hr>
+
+<h2>Resumen</h2>
+<table>
+    <tr><th>Programa</th><th>Pylint Score</th><th>Test Cases</th><th>Estado</th></tr>
+    <tr><td>computeStatistics.py</td><td>10.00/10</td><td>7/7</td><td>PASS</td></tr>
+    <tr><td>convertNumbers.py</td><td>10.00/10</td><td>4/4</td><td>PASS</td></tr>
+    <tr><td>wordCount.py</td><td>10.00/10</td><td>5/5</td><td>PASS</td></tr>
+</table>
+
+<h3>Cumplimiento de Requisitos</h3>
+<ul>
+    <li>✓ Programas siguen estandar PEP-8</li>
+    <li>✓ Pylint score 10.00/10 en todos los programas</li>
+    <li>✓ Manejo de datos invalidos con mensajes de error</li>
+    <li>✓ Salida a pantalla y archivo</li>
+    <li>✓ Tiempo de ejecucion mostrado</li>
+    <li>✓ Algoritmos basicos sin librerias de calculo</li>
+</ul>
+
+</body>
+</html>
