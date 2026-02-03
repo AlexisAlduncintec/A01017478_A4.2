@@ -85,37 +85,37 @@ def compute_variance(data, mean, population=True):
     return sum_sq / (len(data) - 1)
 
 
+def try_parse_float(text):
+    """Attempt to parse text as float."""
+    try:
+        return float(text), True
+    except ValueError:
+        return None, False
+
+
 def extract_number(text):
     """Try to get a number from text."""
     text = text.strip()
     if not text:
         return None, False
 
-    try:
-        return float(text), True
-    except ValueError:
-        pass
+    # Try direct, then comma/semicolon as decimal
+    for attempt in [text, text.replace(',', '.'), text.replace(';', '.')]:
+        result, success = try_parse_float(attempt)
+        if success:
+            return result, success
 
-    # Try extracting numeric part
-    numeric_chars = ""
-    for i, char in enumerate(text):
-        if char in "0123456789.eE+-":
-            if char in "+-":
-                if i == 0 or (i > 0 and text[i-1] in "eE"):
-                    numeric_chars += char
-                else:
-                    break
-            else:
-                numeric_chars += char
+    # Try extracting leading numeric part
+    numeric = ""
+    for i, c in enumerate(text):
+        if c in "0123456789.eE":
+            numeric += c
+        elif c in "+-" and (i == 0 or text[i-1] in "eE"):
+            numeric += c
         else:
             break
 
-    if numeric_chars:
-        try:
-            return float(numeric_chars), True
-        except ValueError:
-            pass
-    return None, False
+    return try_parse_float(numeric) if numeric else (None, False)
 
 
 def read_numbers(filename):
